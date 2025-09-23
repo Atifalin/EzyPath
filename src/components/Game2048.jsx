@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import './Game2048.css';
 
 const GRID_SIZE = 4;
@@ -117,6 +117,8 @@ const hasMovesAvailable = (board) => {
   return false;
 };
 
+const touchThreshold = 30;
+
 const Game2048 = ({ onRestart }) => {
   const [board, setBoard] = useState(() => initializeBoard());
   const [score, setScore] = useState(0);
@@ -126,6 +128,8 @@ const Game2048 = ({ onRestart }) => {
   });
   const [status, setStatus] = useState('playing'); // playing | won | lost
   const [moveCount, setMoveCount] = useState(0);
+  const touchStart = useRef({ x: null, y: null });
+  const touchEnd = useRef({ x: null, y: null });
 
   const leaderboard = useMemo(
     () => [
@@ -201,13 +205,77 @@ const Game2048 = ({ onRestart }) => {
   const boardTiles = useMemo(() => board.flat().filter(Boolean), [board]);
   const maxTile = boardTiles.length ? Math.max(...boardTiles) : 0;
 
+  const handleSwipe = useCallback(
+    (deltaX, deltaY) => {
+      if (status !== 'playing') return;
+      const absX = Math.abs(deltaX);
+      const absY = Math.abs(deltaY);
+
+      if (Math.max(absX, absY) < touchThreshold) return;
+
+      let directionKey = null;
+      if (absX > absY) {
+        directionKey = deltaX > 0 ? 'ArrowRight' : 'ArrowLeft';
+      } else {
+        directionKey = deltaY > 0 ? 'ArrowDown' : 'ArrowUp';
+      }
+
+      const { board: movedBoard, moved, scoreGain, targetReached } = moveAndMerge(board, directionKey);
+      if (!moved) return;
+
+      let updatedBoard = addRandomTile(movedBoard);
+      let newStatus = status;
+
+      if (targetReached) {
+        newStatus = 'won';
+      } else if (!hasMovesAvailable(updatedBoard)) {
+        newStatus = 'lost';
+      }
+
+      const newScore = score + scoreGain;
+      setBoard(updatedBoard);
+      setScore(newScore);
+      setStatus(newStatus);
+      setMoveCount((prev) => prev + 1);
+      updateBestScore(newScore);
+    },
+    [board, score, status, updateBestScore]
+  );
+
+  const handleTouchStart = useCallback((event) => {
+    const touch = event.touches[0];
+    touchStart.current = { x: touch.clientX, y: touch.clientY };
+    touchEnd.current = { x: touch.clientX, y: touch.clientY };
+  }, []);
+
+  const handleTouchMove = useCallback((event) => {
+    const touch = event.touches[0];
+    touchEnd.current = { x: touch.clientX, y: touch.clientY };
+  }, []);
+
+  const handleTouchEnd = useCallback(() => {
+    if (touchStart.current.x === null || touchEnd.current.x === null) return;
+    const deltaX = touchEnd.current.x - touchStart.current.x;
+    const deltaY = touchEnd.current.y - touchStart.current.y;
+    handleSwipe(deltaX, deltaY);
+    touchStart.current = { x: null, y: null };
+    touchEnd.current = { x: null, y: null };
+  }, [handleSwipe]);
+
   const handleOnReset = useCallback(() => {
     resetGame();
     if (onRestart) onRestart();
   }, [onRestart, resetGame]);
 
   return (
-    <div className="game2048" role="region" aria-label="2048 game board">
+    <div
+      className="game2048"
+      role="region"
+      aria-label="2048 game board"
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+    >
       <div className="game2048-header">
         <div>
           <div className="game2048-title">2048</div>
