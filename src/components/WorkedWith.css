@@ -1,0 +1,134 @@
+.worked-with {
+  background: var(--white);
+  position: relative;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: var(--space-sm);
+  color: var(--ink);
+}
+
+.section-subtitle {
+  text-align: center;
+  color: var(--gray-600);
+  margin-bottom: var(--space-2xl);
+  font-size: 1.1rem;
+}
+
+.logos-scroll-container {
+  position: relative;
+  overflow: hidden;
+  padding: var(--space-xl) 0;
+  margin: 0 -20px;
+}
+
+.logos-scroll-container::before,
+.logos-scroll-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.logos-scroll-container::before {
+  left: 0;
+  background: linear-gradient(90deg, var(--white), transparent);
+}
+
+.logos-scroll-container::after {
+  right: 0;
+  background: linear-gradient(270deg, var(--white), transparent);
+}
+
+.logos-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xl);
+  padding: 0 var(--space-xl);
+  will-change: transform;
+}
+
+.logo-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-md) var(--space-xl);
+  background: var(--cloud);
+  border-radius: var(--radius-lg);
+  min-width: 180px;
+  height: 80px;
+  transition: all var(--transition-base);
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(166, 189, 196, 0.1);
+  flex-shrink: 0;
+}
+
+.logo-item:hover {
+  background: var(--white);
+  box-shadow: var(--shadow-lg);
+}
+
+.logo-item img {
+  max-width: 120px;
+  height: auto;
+  filter: grayscale(100%);
+  opacity: 0.7;
+  transition: all var(--transition-base);
+}
+
+.logo-item:hover img {
+  filter: grayscale(0%);
+  opacity: 1;
+}
+
+.logos-grid {
+  display: none;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-lg);
+  padding: var(--space-xl) 0;
+}
+
+.logo-grid-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-lg);
+  background: var(--cloud);
+  border-radius: var(--radius-lg);
+  min-height: 100px;
+  transition: all var(--transition-base);
+}
+
+.logo-grid-item:hover {
+  background: var(--white);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-5px);
+}
+
+.logo-grid-item img {
+  max-width: 120px;
+  height: auto;
+  filter: grayscale(100%);
+  opacity: 0.7;
+  transition: all var(--transition-base);
+}
+
+.logo-grid-item:hover img {
+  filter: grayscale(0%);
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .logos-scroll-container {
+    display: none;
+  }
+
+  .logos-grid {
+    display: grid;
+  }
+}
