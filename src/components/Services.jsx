@@ -58,7 +58,7 @@ const Services = () => {
   };
 
   return (
-    <section id="services" className="services section">
+    <section id="services" className="services section" aria-labelledby="services-heading">
       <div className="container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -67,7 +67,7 @@ const Services = () => {
           transition={{ duration: 0.6 }}
           className="services-header"
         >
-          <h2 className="section-title">
+          <h2 id="services-heading" className="section-title">
             <span className="text-gradient">Our Services</span>
           </h2>
           <p className="section-subtitle">

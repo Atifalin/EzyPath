@@ -1,0 +1,105 @@
+.not-found {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--cloud) 0%, var(--gray-100) 100%);
+}
+
+.not-found-container {
+  text-align: center;
+  padding: var(--space-2xl) var(--space-md);
+}
+
+.not-found-content {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.not-found-number {
+  font-size: clamp(6rem, 15vw, 12rem);
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--deep-blue), var(--sunrise-gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+  margin-bottom: var(--space-md);
+  font-family: var(--font-heading);
+}
+
+.not-found-title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  color: var(--ink);
+  margin-bottom: var(--space-md);
+  font-weight: 600;
+}
+
+.not-found-description {
+  font-size: 1.125rem;
+  color: var(--gray-600);
+  line-height: 1.8;
+  margin-bottom: var(--space-xl);
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.not-found-buttons {
+  display: flex;
+  gap: var(--space-md);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.not-found .btn {
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: var(--radius-lg);
+  transition: all var(--transition-base);
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+
+.not-found .btn-primary {
+  background: var(--deep-blue);
+  color: white;
+  border-color: var(--deep-blue);
+}
+
+.not-found .btn-primary:hover {
+  background: var(--sunrise-gold);
+  border-color: var(--sunrise-gold);
+  box-shadow: var(--shadow-lg);
+}
+
+.not-found .btn-primary:focus-visible {
+  outline: 2px solid var(--deep-blue);
+  outline-offset: 4px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .not-found-number {
+    font-size: clamp(4rem, 12vw, 8rem);
+  }
+
+  .not-found-title {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+  }
+
+  .not-found-description {
+    font-size: 1rem;
+  }
+
+  .not-found-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .not-found .btn {
+    width: 100%;
+    max-width: 300px;
+  }
+}

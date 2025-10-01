@@ -17,7 +17,7 @@ const About = () => {
   };
 
   return (
-    <section id="about" className="about section">
+    <section id="about" className="about section" aria-labelledby="about-heading">
       <div className="container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -26,7 +26,7 @@ const About = () => {
           transition={{ duration: 0.6 }}
           className="about-header"
         >
-          <h2 className="section-title">
+          <h2 id="about-heading" className="section-title">
             <span className="text-gradient">About Me</span>
           </h2>
         </motion.div>

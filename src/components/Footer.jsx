@@ -78,7 +78,7 @@ const Footer = () => {
   }, []);
 
   return (
-    <footer className="footer">
+    <footer className="footer" role="contentinfo" aria-label="Site footer">
       <div className="container footer-container">
         <motion.div
           className="footer-content"
@@ -151,6 +151,7 @@ const Footer = () => {
                 type="button"
                 className="footer-game-close"
                 onClick={handleCloseGame}
+                aria-label="Close game and return to website"
               >
                 Back to work
               </button>
@@ -170,6 +171,7 @@ const Footer = () => {
                 type="button"
                 className="footer-game-close"
                 onClick={handleClosePuzzle}
+                aria-label="Close puzzle and return to website"
               >
                 Back to work
               </button>

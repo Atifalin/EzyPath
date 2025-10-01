@@ -58,7 +58,7 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="contact section">
+    <section id="contact" className="contact section" aria-labelledby="contact-heading">
       <div className="container">
         <motion.div
           className="section-title-container"
@@ -67,7 +67,7 @@ const Contact = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="section-title">Get in Touch</h2>
+          <h2 id="contact-heading" className="section-title">Get in Touch</h2>
           <p className="section-subtitle">
             Ready to transform your business? Let's talk about your project.
           </p>
@@ -80,9 +80,15 @@ const Contact = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <form className="contact-form" action="https://formspree.io/f/xblzjong" method="POST" onSubmit={handleSubmit}>
+          <form 
+            className="contact-form" 
+            action="https://formspree.io/f/xblzjong" 
+            method="POST" 
+            onSubmit={handleSubmit}
+            aria-label="Contact form"
+          >
             {/* Honeypot field to prevent spam - not visible to users */}
-            <input type="text" name="_gotcha" style={{ display: 'none' }} />
+            <input type="text" name="_gotcha" style={{ display: 'none' }} tabIndex="-1" aria-hidden="true" />
             
             {/* Hidden subject field */}
             <input type="hidden" name="_subject" value="New message from EzyPath.in" />
@@ -140,11 +146,13 @@ const Contact = () => {
                 type="submit"
                 className="form-submit"
                 disabled={isSubmitting}
+                aria-label={isSubmitting ? 'Sending message' : 'Send message'}
+                aria-busy={isSubmitting}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
                 {isSubmitting ? (
-                  <span className="loading-spinner">Sending...</span>
+                  <span className="loading-spinner" role="status" aria-live="polite">Sending...</span>
                 ) : (
                   'Send Message'
                 )}

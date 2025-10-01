@@ -53,7 +53,10 @@ const Navbar = () => {
 
         <AnimatePresence>
           <motion.div 
+            id="navbar-menu"
             className={`navbar-menu ${isMobileMenuOpen ? 'navbar-menu-open' : ''}`}
+            role="navigation"
+            aria-label="Main navigation"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, staggerChildren: 0.1 }}
@@ -80,7 +83,9 @@ const Navbar = () => {
         <motion.button
           className="navbar-toggle"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          aria-label="Toggle menu"
+          aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={isMobileMenuOpen}
+          aria-controls="navbar-menu"
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
         >

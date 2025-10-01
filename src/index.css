@@ -101,6 +101,19 @@ p {
   line-height: 1.8;
 }
 
+/* Ensure sufficient contrast for small text */
+.text-muted,
+.section-subtitle {
+  color: var(--gray-600);
+  font-size: 1.125rem;
+}
+
+/* For very small text, use darker color */
+small,
+.text-small {
+  color: var(--gray-800);
+}
+
 a {
   color: var(--deep-blue);
   text-decoration: none;
@@ -216,10 +229,48 @@ button {
   background: var(--gray-500);
 }
 
-/* Focus Styles */
+/* Enhanced Focus Styles for Keyboard Navigation */
 *:focus-visible {
-  outline: 2px solid var(--deep-blue);
-  outline-offset: 2px;
+  outline: 3px solid var(--deep-blue);
+  outline-offset: 3px;
+  transition: outline-offset var(--transition-fast);
+}
+
+/* Focus styles for interactive elements */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 3px solid var(--deep-blue);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 4px rgba(11, 110, 168, 0.1);
+}
+
+/* Special focus for primary buttons */
+.btn-primary:focus-visible {
+  outline: 3px solid var(--sunrise-gold);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 4px rgba(242, 181, 68, 0.2);
+}
+
+/* Remove default focus outline but keep for keyboard users */
+*:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Ensure all interactive elements are keyboard accessible */
+[role="button"],
+[tabindex]:not([tabindex="-1"]) {
+  cursor: pointer;
+}
+
+/* Focus within for containers */
+.card:focus-within,
+.service-card:focus-within,
+.form-group:focus-within {
+  box-shadow: 0 0 0 2px var(--deep-blue);
+  border-radius: var(--radius-md);
 }
 
 /* Loading Skeleton */

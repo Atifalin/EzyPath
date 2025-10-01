@@ -9,12 +9,12 @@ const WorkedWith = () => {
   
   // Duplicate logos for a continuous scrolling effect
   const logos = [
-    { name: 'Kruger', src: '/kruger-logo.svg' },
-    { name: 'Compugen', src: '/compugen-logo.svg' },
-    { name: 'HomeHeros', src: '/homeheros-logo.svg' },
-    { name: 'Kruger', src: '/kruger-logo.svg' },
-    { name: 'Compugen', src: '/compugen-logo.svg' },
-    { name: 'HomeHeros', src: '/homeheros-logo.svg' },
+    { name: 'Kruger', src: '/kruger-logo.svg', alt: 'Kruger company logo' },
+    { name: 'Compugen', src: '/compugen-logo.svg', alt: 'Compugen company logo' },
+    { name: 'HomeHeros', src: '/homeheros-logo.svg', alt: 'HomeHeros company logo' },
+    { name: 'Kruger', src: '/kruger-logo.svg', alt: 'Kruger company logo' },
+    { name: 'Compugen', src: '/compugen-logo.svg', alt: 'Compugen company logo' },
+    { name: 'HomeHeros', src: '/homeheros-logo.svg', alt: 'HomeHeros company logo' },
   ];
 
   return (
@@ -56,7 +56,7 @@ const WorkedWith = () => {
                   delay: index * 0.1 % 0.3 // Create groups of animations
                 }}
               >
-                <img src={logo.src} alt={logo.name} />
+                <img src={logo.src} alt={logo.alt} />
               </motion.div>
             ))}
           </motion.div>
@@ -73,7 +73,7 @@ const WorkedWith = () => {
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
             >
-              <img src={logo.src} alt={logo.name} />
+              <img src={logo.src} alt={logo.alt} />
             </motion.div>
           ))}
         </div>

@@ -13,7 +13,7 @@ const Hero = () => {
   };
 
   return (
-    <section id="home" className="hero">
+    <section id="home" className="hero" aria-labelledby="hero-heading">
       <div className="container hero-container">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -21,7 +21,7 @@ const Hero = () => {
           transition={{ duration: 0.8 }}
           className="hero-content"
         >
-          <h1 className="hero-title">
+          <h1 id="hero-heading" className="hero-title">
             EzyPath Solutions India
           </h1>
           
