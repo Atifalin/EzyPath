@@ -1,10 +1,77 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import ClickSpark from './ClickSpark';
 import Ballpit from './Ballpit';
 import './Hero.css';
 
 const Hero = () => {
+  const [ballpitConfig, setBallpitConfig] = useState({
+    count: 180,
+    minSize: 0.5,
+    maxSize: 1.5,
+    size0: 2,
+    maxX: 20,
+    maxY: 15,
+    maxZ: 8
+  });
+
+  useEffect(() => {
+    const updateBallpitConfig = () => {
+      const width = window.innerWidth;
+      
+      if (width >= 2560) {
+        // 2K and above
+        setBallpitConfig({
+          count: 200,
+          minSize: 0.4,
+          maxSize: 1.2,
+          size0: 1.5,
+          maxX: 25,
+          maxY: 18,
+          maxZ: 10
+        });
+      } else if (width >= 1920) {
+        // Full HD
+        setBallpitConfig({
+          count: 180,
+          minSize: 0.5,
+          maxSize: 1.5,
+          size0: 2,
+          maxX: 20,
+          maxY: 15,
+          maxZ: 8
+        });
+      } else if (width >= 1440) {
+        // Laptop
+        setBallpitConfig({
+          count: 150,
+          minSize: 0.5,
+          maxSize: 1.4,
+          size0: 1.8,
+          maxX: 18,
+          maxY: 13,
+          maxZ: 7
+        });
+      } else {
+        // Tablet and below
+        setBallpitConfig({
+          count: 120,
+          minSize: 0.5,
+          maxSize: 1.3,
+          size0: 1.6,
+          maxX: 15,
+          maxY: 12,
+          maxZ: 6
+        });
+      }
+    };
+
+    updateBallpitConfig();
+    window.addEventListener('resize', updateBallpitConfig);
+    
+    return () => window.removeEventListener('resize', updateBallpitConfig);
+  }, []);
+
   const scrollToSection = (sectionId) => {
     const element = document.querySelector(sectionId);
     if (element) {
@@ -85,19 +152,20 @@ const Hero = () => {
 
         <div className="hero-background">
           <Ballpit 
+            key={JSON.stringify(ballpitConfig)}
             className="ballpit-canvas" 
             followCursor={true} 
-            count={180}
+            count={ballpitConfig.count}
             colors={['#0B6EA8', '#A6BDC4', '#F2B544']} 
-            minSize={0.5}
-            maxSize={1.5}
-            size0={2}
+            minSize={ballpitConfig.minSize}
+            maxSize={ballpitConfig.maxSize}
+            size0={ballpitConfig.size0}
             gravity={0.15}
             friction={0.995}
             maxVelocity={0.1}
-            maxX={20}
-            maxY={15}
-            maxZ={8}
+            maxX={ballpitConfig.maxX}
+            maxY={ballpitConfig.maxY}
+            maxZ={ballpitConfig.maxZ}
             materialParams={{
               metalness: 0.4,
               roughness: 0.3,

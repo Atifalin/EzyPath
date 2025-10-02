@@ -1,4 +1,5 @@
 .hero {
+  min-height: 100vh;
   height: 100vh;
   width: 100%;
   display: flex;
@@ -15,8 +16,12 @@
   position: relative;
   z-index: 2;
   width: 100%;
-  max-width: 1200px;
+  max-width: 1400px;
   padding: 0 var(--space-md);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .hero-content {
@@ -115,27 +120,112 @@
 
 .hero-background {
   position: absolute;
-  top: -5%;
-  left: 50%;
-  width: 140%;
-  height: 110%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   z-index: 0;
   pointer-events: none;
   overflow: hidden;
-  transform: translateX(-50%);
 }
 
 .ballpit-canvas {
   position: absolute;
   top: 0;
-  left: 50%;
-  width: 130%;
+  left: 0;
+  width: 100%;
   height: 100%;
   z-index: 0;
   pointer-events: all;
-  transform: translateX(-50%);
 }
 
+/* Large screens (2K and above) */
+@media (min-width: 2560px) {
+  .hero {
+    min-height: 100vh;
+    height: 100vh;
+  }
+
+  .hero-container {
+    max-width: 1800px;
+  }
+
+  .hero-content {
+    max-width: 1300px;
+    padding: 3rem 4rem;
+  }
+
+  .hero-title {
+    font-size: 5rem;
+    margin-bottom: 2rem;
+  }
+
+  .tagline-static {
+    font-size: 3rem;
+  }
+
+  .hero-description {
+    font-size: 1.6rem;
+    max-width: 1000px;
+    line-height: 1.8;
+  }
+
+  .btn {
+    padding: 1.2rem 2.5rem;
+    font-size: 1.2rem;
+    min-width: 200px;
+  }
+}
+
+/* Desktop (1920px - 2559px) */
+@media (min-width: 1920px) and (max-width: 2559px) {
+  .hero {
+    height: 100vh;
+  }
+
+  .hero-container {
+    max-width: 1600px;
+  }
+
+  .hero-content {
+    max-width: 1100px;
+    padding: 2.5rem 3.5rem;
+  }
+
+  .hero-title {
+    font-size: 4.5rem;
+  }
+
+  .tagline-static {
+    font-size: 2.5rem;
+  }
+
+  .hero-description {
+    font-size: 1.4rem;
+    max-width: 850px;
+  }
+}
+
+/* Desktop (1440px - 1919px) */
+@media (min-width: 1440px) and (max-width: 1919px) {
+  .hero-content {
+    max-width: 950px;
+  }
+}
+
+/* Tablet and smaller desktop */
+@media (max-width: 1024px) {
+  .hero-content {
+    max-width: 700px;
+    padding: var(--space-lg);
+  }
+
+  .hero-background {
+    width: 150%;
+  }
+}
+
+/* Mobile */
 @media (max-width: 768px) {
   .hero {
     height: auto;
@@ -159,5 +249,13 @@
   .btn {
     width: 100%;
     max-width: 250px;
+  }
+
+  .hero-background {
+    width: 160%;
+  }
+
+  .ballpit-canvas {
+    width: 140%;
   }
 }
