@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 // WorkedWith component temporarily hidden - uncomment the import when restoring
@@ -7,9 +7,28 @@ import Services from './components/Services'
 import About from './components/About'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
+import PrivacyPolicy from './components/PrivacyPolicy'
 import './App.css'
 
 function App() {
+  const [currentView, setCurrentView] = useState('home')
+
+  // Handle hash-based routing
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.replace('#', '');
+      setCurrentView(hash || 'home');
+    };
+
+    // Set initial view
+    handleHashChange();
+    window.addEventListener('hashchange', handleHashChange);
+
+    return () => {
+      window.removeEventListener('hashchange', handleHashChange);
+    };
+  }, []);
+
   // Set canonical URL and update on hash changes
   useEffect(() => {
     const updateCanonicalUrl = () => {
@@ -38,6 +57,18 @@ function App() {
     };
   }, []);
 
+  // Render privacy policy page
+  if (currentView === 'privacy-policy') {
+    return (
+      <div className="app">
+        <Navbar />
+        <PrivacyPolicy />
+        <Footer />
+      </div>
+    );
+  }
+
+  // Render main home page
   return (
     <div className="app">
       <a href="#main-content" className="skip-to-content">

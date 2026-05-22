@@ -127,13 +127,18 @@ const Footer = () => {
             <p className="footer-copyright">
               © {new Date().getFullYear()} EzyPath Solutions India. All rights reserved.
             </p>
-            <button
-              type="button"
-              className="footer-tagline"
-              onClick={handleTaglineClick}
-            >
-              Simplify. Automate. Scale.
-            </button>
+            <div className="footer-links">
+              <a href="#privacy-policy" className="footer-link footer-link--small">
+                Privacy Policy
+              </a>
+              <button
+                type="button"
+                className="footer-tagline"
+                onClick={handleTaglineClick}
+              >
+                Simplify. Automate. Scale.
+              </button>
+            </div>
             {hintMessage && (
               <p className="footer-hint" aria-live="polite">
                 {hintMessage}

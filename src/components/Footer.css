@@ -84,6 +84,18 @@
   color: var(--sunrise-gold);
 }
 
+.footer-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-xs);
+}
+
+.footer-link--small {
+  font-size: 0.85rem;
+}
+
 .footer-divider {
   width: 100%;
   max-width: 600px;
